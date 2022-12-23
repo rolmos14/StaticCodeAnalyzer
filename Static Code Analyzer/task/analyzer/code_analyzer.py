@@ -1,4 +1,6 @@
 import re
+import sys
+import os
 
 
 class StaticCodeAnalyzer:
@@ -12,8 +14,10 @@ class StaticCodeAnalyzer:
                           5: "TODO found",
                           6: "More than two blank lines preceding a code line"}}
 
-    def __init__(self, file_path):
-        self.file_content = self.read_file_lines(file_path)
+    def __init__(self, path: str):
+        self.main_path = path
+        self.file_path = ""
+        self.file_content = []
         self.line_num = 0
         self.line_content = ""
         self.blank_lines = 0
@@ -23,10 +27,11 @@ class StaticCodeAnalyzer:
         with open(file_path, 'r') as file:
             return file.read().splitlines()
 
-    def print_line_issue(self, issue_type: str, issue_num: int) -> 'prints issue with format "Line X: Code Message"':
+    def print_line_issue(self, issue_type: str, issue_num: int) -> \
+            'prints issue with format "Path: Line X: Code Message"':
         code = issue_type + str(issue_num).zfill(3)
         msg = self.code_message[issue_type][issue_num]
-        print(f'Line {self.line_num + 1}: {code} {msg}')
+        print(f'{self.file_path}: Line {self.line_num + 1}: {code} {msg}')
 
     def check_style(self):
         # Iterates over all style codes in self.code_message dictionary
@@ -78,10 +83,22 @@ class StaticCodeAnalyzer:
         return string.split('#')
 
     def run(self):
-        for self.line_num, self.line_content in enumerate(self.file_content):
-            self.check_style()
+        # Check if it's file or directory
+        if self.main_path.endswith(".py"):
+            self.file_path = self.main_path
+            self.file_content = self.read_file_lines(self.file_path)
+            for self.line_num, self.line_content in enumerate(self.file_content):
+                self.check_style()
+        else:
+            # List all files in the directory using scandir()
+            with os.scandir(self.main_path) as entries:
+                for entry in entries:
+                    if entry.is_file() and entry.name.endswith(".py") and entry.name != "tests.py":
+                        self.file_path = self.main_path + '\\' + entry.name
+                        self.file_content = self.read_file_lines(self.file_path)
+                        for self.line_num, self.line_content in enumerate(self.file_content):
+                            self.check_style()
 
-
-file_path = input()
-code_analyzer = StaticCodeAnalyzer(file_path)
+path = sys.argv[1]
+code_analyzer = StaticCodeAnalyzer(path)
 code_analyzer.run()

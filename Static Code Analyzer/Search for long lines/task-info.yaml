@@ -94,7 +94,7 @@ files:
 - name: analyzer/phyton_code.txt
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/projects/112/stages/609/implement#comment
+feedback_link: https://hyperskill.org/learn/step/9903#comment
 status: Solved
 feedback:
   message: Congratulations!

@@ -281,17 +281,6 @@ files:
           print('hello')
             print('hello')
   learner_created: false
-- name: test/test_0.py
-  visible: false
-  text: |
-    if True:
-
-
-
-
-     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
-     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
-  learner_created: false
 - name: test/test_5.py
   visible: false
   text: |-
@@ -332,9 +321,20 @@ files:
         print('NO TODO HERE;;')
         pass; # Todo something
   learner_created: false
-feedback_link: https://hyperskill.org/projects/112/stages/610/implement#comment
+- name: test/test_0.py
+  visible: false
+  text: |
+    if True:
+
+
+
+
+     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
+     print('hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'); #TODO
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/9904#comment
 status: Solved
 feedback:
   message: Congratulations!
-  time: Mon, 12 Dec 2022 21:51:35 UTC
-record: -1
+  time: Mon, 12 Dec 2022 22:27:29 UTC
+record: 2
